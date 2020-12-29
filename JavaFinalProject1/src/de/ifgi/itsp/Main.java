@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         /* Reading the text cities file*/
-        File cityDataFile = new File("europeancities.txt");
+        File cityDataFile = new File("C:\\Users\\ADMIN\\Desktop\\itsp-java\\JavaFinalProject1\\src\\de\\ifgi\\itsp\\europeancities.txt");
         Scanner cityDataFileReader = null;
         try {
             cityDataFileReader = new Scanner(cityDataFile);
@@ -32,7 +32,7 @@ public class Main {
                 /* Getting City name*/
                 randomCity.setName(splitData[0]);
 
-                /* Getting location data*/
+                //Getting location data
                 String[] location;
                 location = splitData[1].split(" ");
                 double lat = Double.parseDouble(location[0]);
