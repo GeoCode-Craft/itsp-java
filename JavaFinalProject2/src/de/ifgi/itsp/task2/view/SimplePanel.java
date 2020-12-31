@@ -2,9 +2,7 @@ package de.ifgi.itsp.task2.view;
 
 
 
-import de.ifgi.itsp.task2.Main;
 import de.ifgi.itsp.task2.shapes.Point;
-import de.ifgi.itsp.task2.utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,13 +45,15 @@ public class SimplePanel extends JPanel{
 
 			g2d.setStroke(new BasicStroke((float)p.getStrokeWidth(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 			/* Scaled X and Scaled Y from Point*/
-			Ellipse2D.Double shape = new Ellipse2D.Double(p.getScaledX(Utility.bboxHeight(Main.citiesLocation),Utility.bboxWidth(Main.citiesLocation)) ,p.getScaledY(Utility.bboxHeight(Main.citiesLocation),Utility.bboxWidth(Main.citiesLocation)), 5.0, 5.0 );
+			Ellipse2D.Double shape = new Ellipse2D.Double(p.getX() ,p.getY(), 5.0, 5.0 );
 			g2d.draw(shape);
 
 			g2d.setColor( p.getFillColor());
 			g2d.fill(shape);
 
 		}
+
+
 
 	}
 
