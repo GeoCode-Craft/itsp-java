@@ -16,13 +16,17 @@ public class SimpleFrame extends JFrame{
 		
 		panel = new SimplePanel();
 		panel.setSize(i, j);
+		//Padding
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 		this.add(panel);
 		this.setResizable(true);
 	    this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
 	    this.setSize(i, j);
-	 
 
-	    this.setVisible(true);
+
+
+
+		this.setVisible(true);
 	}
 
 	public void addToPlot(Point point) {
