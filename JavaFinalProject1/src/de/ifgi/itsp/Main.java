@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /* Reading the text cities file*/
+        /* Reading the text cities file*/ //pondijavafinalproject1//C:\Users\ADMIN\Desktop\itsp-java\JavaFinalProject1\src\de\ifgi\itsp\europeancities.txt
         File cityDataFile = new File("C:\\Users\\ADMIN\\Desktop\\itsp-java\\JavaFinalProject1\\src\\de\\ifgi\\itsp\\europeancities.txt");
         Scanner cityDataFileReader = null;
         try {

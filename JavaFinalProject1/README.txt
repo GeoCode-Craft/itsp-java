@@ -1,0 +1,1 @@
+name,lat,lon,area,pop,pop density,gdp,%foreign residents
