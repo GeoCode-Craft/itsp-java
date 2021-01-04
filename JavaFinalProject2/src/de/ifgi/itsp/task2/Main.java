@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        SimpleFrame frame = new SimpleFrame(3000,3000);
+
 
         /* Get File data*/
         List<City> listCities = Utility.getCityPointsFromFile();
@@ -32,7 +32,10 @@ public class Main {
 
         /* Carry out Scaling*/
         City[] scaledCities = new City[arrayCities.length];
-        double scale = 900 / Math.max(Utility.bboxHeight(boundingBoxValues),Utility.bboxWidth(boundingBoxValues));
+        double boundingBoxHeight = Utility.bboxHeight(boundingBoxValues);
+        double boundingBoxWidth = Utility.bboxWidth(boundingBoxValues);
+
+        double scale = 900 / Math.max(boundingBoxHeight,boundingBoxWidth);
         for(int i=0; i< arrayCities.length; i++){
             scaledCities[i]=arrayCities[i];
             System.out.println("---------Before Scaling----------------");
@@ -71,10 +74,20 @@ public class Main {
             System.out.println("---------After Flipping----------------");
             System.out.println(flippedCities[i].getLocation());
         }
+        /* Set drawing environment*/
+        /*
+        double padding = 50.0;
+        boundingBoxHeight = boundingBoxHeight + padding;
+        boundingBoxWidth = boundingBoxWidth + padding;
+        scale = 900/Math.max(boundingBoxWidth, boundingBoxHeight);
+        int height = (int)(1000 * scale);
+        int width = (int)(1000 * scale);
 
+        */
+        SimpleFrame frame = new SimpleFrame(1000,1000);
 
         /* Add cities to Plot*/
-        for(City city: flippedCities){
+        for(City city: arrayCities){
             frame.addToPlot(city.getLocation());
         }
 

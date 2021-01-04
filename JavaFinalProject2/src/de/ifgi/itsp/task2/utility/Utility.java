@@ -97,6 +97,7 @@ public class Utility {
     }
 
     public static double bboxWidth(double[] bbox){
+
         return bbox[2] - bbox[0];
     }
 
@@ -104,12 +105,12 @@ public class Utility {
 
     public static double bboxCenterX(double[] bbox) {
         double centerX;
-        centerX= bbox[0] + (bboxHeight(bbox)/2) ;
+        centerX= bbox[0] + (bboxWidth(bbox)/2) ;
         return centerX;
     }
     public static double bboxCenterY(double[] bbox) {
         double centerY;
-        centerY= bbox[0] + (bboxWidth(bbox)/2) ;
+        centerY= bbox[1] + (bboxHeight(bbox)/2) ;
         return centerY;
     }
 
