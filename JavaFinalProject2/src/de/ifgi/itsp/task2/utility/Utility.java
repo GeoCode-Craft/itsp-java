@@ -101,18 +101,6 @@ public class Utility {
         return bbox[2] - bbox[0];
     }
 
-    /*Calculate center of a bounding box*/
-
-    public static double bboxCenterX(double[] bbox) {
-        double centerX;
-        centerX= bbox[0] + (bboxWidth(bbox)/2) ;
-        return centerX;
-    }
-    public static double bboxCenterY(double[] bbox) {
-        double centerY;
-        centerY= bbox[1] + (bboxHeight(bbox)/2) ;
-        return centerY;
-    }
 
 
 
