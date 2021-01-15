@@ -1,6 +1,7 @@
 package de.ifgi.itsp.task2;
 
 import de.ifgi.itsp.task2.shapes.City;
+import de.ifgi.itsp.task2.shapes.Label;
 import de.ifgi.itsp.task2.utility.Utility;
 import de.ifgi.itsp.task2.view.SimpleFrame;
 
@@ -35,7 +36,11 @@ public class Main {
         double boundingBoxHeight = Utility.bboxHeight(boundingBoxValues);
         double boundingBoxWidth = Utility.bboxWidth(boundingBoxValues);
 
-        double scale = 900 / Math.max(boundingBoxHeight,boundingBoxWidth);
+        System.out.println("Bounding Box Height is " + boundingBoxHeight);
+        System.out.println("Bounding Box Width is " + boundingBoxWidth);
+
+        double scale =  900/Math.max(boundingBoxHeight,boundingBoxWidth);
+        System.out.println("Scale value is " + scale);
         for(int i=0; i< arrayCities.length; i++){
             scaledCities[i]=arrayCities[i];
             System.out.println("---------Before Scaling----------------");
@@ -69,26 +74,39 @@ public class Main {
             flippedCities[i] =arrayCities[i];
             System.out.println("---------Before Flipping----------------");
             System.out.println(flippedCities[i].getLocation());
-            flippedCities[i].getLocation().setX(translatedCities[i].getLocation().getX());
-            flippedCities[i].getLocation().setY(flippingValue - translatedCities[i].getLocation().getY());
+            flippedCities[i].getLocation().setX(Math.abs(translatedCities[i].getLocation().getX()-2_000));
+            flippedCities[i].getLocation().setY(Math.abs(flippingValue - translatedCities[i].getLocation().getY()));
             System.out.println("---------After Flipping----------------");
             System.out.println(flippedCities[i].getLocation());
         }
         /* Set drawing environment*/
         /*
         double padding = 50.0;
-        boundingBoxHeight = boundingBoxHeight + padding;
-        boundingBoxWidth = boundingBoxWidth + padding;
-        scale = 900/Math.max(boundingBoxWidth, boundingBoxHeight);
+        double bBoxHeight = boundingBoxHeight  ; //boundingBoxHeight + padding
+        double bBoxWidth = boundingBoxWidth  ;
+        scale = Math.max(bBoxHeight,bBoxWidth)/900;
         int height = (int)(1000 * scale);
         int width = (int)(1000 * scale);
-
+        System.out.println("Height is " + height);
+        System.out.println("Width is " + width);
         */
-        SimpleFrame frame = new SimpleFrame(1000,1000);
+
+        SimpleFrame frame = new SimpleFrame(1200,600);
+
+        /* Add cities Names to Plot*/
+        for (int i = 1; i < flippedCities.length; i++) {
+            flippedCities[i].getLocation().getX();
+            flippedCities[i].getLocation().getY();
+            Label cityname = new Label();
+            cityname.setText(flippedCities[i].getName());
+            cityname.setPosition(flippedCities[i].getLocation());
+            frame.addToPlot(cityname);
+        }
 
         /* Add cities to Plot*/
-        for(City city: arrayCities){
+        for(City city: flippedCities){
             frame.addToPlot(city.getLocation());
+            System.out.println(city.getName() + " : " + city.getLocation() );
         }
 
 

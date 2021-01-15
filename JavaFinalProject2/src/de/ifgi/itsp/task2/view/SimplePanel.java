@@ -3,6 +3,7 @@ package de.ifgi.itsp.task2.view;
 
 
 import de.ifgi.itsp.task2.shapes.Point;
+import de.ifgi.itsp.task2.shapes.Label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +52,12 @@ public class SimplePanel extends JPanel{
 			g2d.setColor( p.getFillColor());
 			g2d.fill(shape);
 
+		}
+
+		/* DRAW LABELS */
+		for(Label l: content.getLabels()){
+			g2d.setColor( l.getStrokeColor());
+			g2d.drawString(l.getText(), Math.round(l.getPosition().getX()) , Math.round(l.getPosition().getY()) );
 		}
 
 

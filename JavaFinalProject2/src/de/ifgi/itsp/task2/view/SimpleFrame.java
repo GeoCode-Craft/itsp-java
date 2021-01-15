@@ -1,6 +1,7 @@
 package de.ifgi.itsp.task2.view;
 
 import de.ifgi.itsp.task2.shapes.Point;
+import de.ifgi.itsp.task2.shapes.Label;
 
 import javax.swing.*;
 
@@ -32,6 +33,11 @@ public class SimpleFrame extends JFrame{
 	public void addToPlot(Point point) {
 		panel.getContent().getPoints().add(point);
 	}
+
+	public void addToPlot(Label l) {
+		panel.getContent().getLabels().add(l);
+	}
+
 
 
 	public void drawAllFeature() {
