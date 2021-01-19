@@ -48,13 +48,4 @@ public class Point extends Shape{
         this.y = y;
     }
 
-    public double getScaledX(double height,double width) {
-        double scale = 900 / Math.max(height, width);
-        return this.x * scale;
-    }
-
-    public double getScaledY(double height,double width) {
-        double scale = 900 / Math.max(height, width);
-        return this.y * scale;
-    }
 }

@@ -56,10 +56,10 @@ public class Main {
         for (int i = 0; i < arrayCities.length; i++) {
             arrayCities[i].getLocation().setX(arrayCities[i].getLocation().getX()*scale);
             arrayCities[i].getLocation().setY(arrayCities[i].getLocation().getY()*scale);
-            Label cityname = new Label();
-            cityname.setText(arrayCities[i].getName());
-            cityname.setPosition(arrayCities[i].getLocation());
-            frame.addToPlot(cityname);
+            Label cityName = new Label();
+            cityName.setText(arrayCities[i].getName());
+            cityName.setPosition(arrayCities[i].getLocation());
+            frame.addToPlot(cityName);
         }
 
 

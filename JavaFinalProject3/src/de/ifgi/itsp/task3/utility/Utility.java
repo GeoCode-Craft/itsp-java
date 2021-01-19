@@ -1,7 +1,7 @@
 package de.ifgi.itsp.task3.utility;
 
-import de.ifgi.itsp.task3.shapes.City;
 import de.ifgi.itsp.task3.shapes.Point;
+import de.ifgi.itsp.task3.shapes.City;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Utility {
 
-    public static  final double  WINDOWCENTER = 500.00;
 
     public static List<City> getCityPointsFromFile(){
         /* Reading the text cities file*/
@@ -101,18 +100,6 @@ public class Utility {
         return bbox[2] - bbox[0];
     }
 
-    /*Calculate center of a bounding box*/
-
-    public static double bboxCenterX(double[] bbox) {
-        double centerX;
-        centerX= bbox[0] + (bboxWidth(bbox)/2) ;
-        return centerX;
-    }
-    public static double bboxCenterY(double[] bbox) {
-        double centerY;
-        centerY= bbox[1] + (bboxHeight(bbox)/2) ;
-        return centerY;
-    }
 
 
 
