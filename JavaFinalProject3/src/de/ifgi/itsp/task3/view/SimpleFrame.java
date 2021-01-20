@@ -1,11 +1,6 @@
 package de.ifgi.itsp.task3.view;
 
-import de.ifgi.itsp.task3.shapes.Label;
-import de.ifgi.itsp.task3.shapes.Point;
-import de.ifgi.itsp.task3.shapes.Polyline;
-import de.ifgi.itsp.task3.shapes.Polygon;
-import de.ifgi.itsp.task3.shapes.Rectangle;
-import de.ifgi.itsp.task3.shapes.Circle;
+import de.ifgi.itsp.task3.shapes.*;
 
 import javax.swing.*;
 
@@ -17,7 +12,7 @@ public class SimpleFrame extends JFrame{
 	private SimplePanel panel;
 
 	public SimpleFrame(int i, int j) {
-		this.setTitle("Simple Cartesian Panel");
+		this.setTitle("Top Ten European Cities by Population");
 		
 		panel = new SimplePanel();
 		panel.setSize(i, j);

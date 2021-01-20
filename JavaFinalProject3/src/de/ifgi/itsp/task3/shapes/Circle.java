@@ -12,7 +12,10 @@ public class Circle extends Shape {
         this.diameter = diameter;
     }
 
- 
+    public Circle() { }
+
+
+
     public double area() {
         double radius = this.diameter /2;
         return Math.PI  * Math.pow(radius,2);
