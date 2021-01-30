@@ -92,7 +92,7 @@ public class Main {
 
 
         }
-        /* Define Rectangle for GDP data */
+        /* Define Rectangle for Local population  Graph*/
         for (int i = 0; i < arrayCities.length; i++) {
             /* Define Rectangle for Local Population Graph */
             Rectangle localPopulation = new Rectangle();
@@ -101,24 +101,39 @@ public class Main {
             localStartPoint.setY(arrayCities[i].getLocation().getY());
             localPopulation.setTopLeftPoint(localStartPoint);
             localPopulation.setWidth(20.0 );
-            localPopulation.setHeight(100.0 - arrayCities[i].getForeignResidentsPercentage() );
+            localPopulation.setHeight(100 - arrayCities[i].getForeignResidentsPercentage() );
             localPopulation.setFillColor(Color.BLUE);
+            Label localPopulationLabel = new Label();
+            localStartPoint.setY(localStartPoint.getY() );
+            localPopulationLabel.setText(String.valueOf(100 - arrayCities[i].getForeignResidentsPercentage()));
+            localPopulationLabel.setPosition(localStartPoint);
 
             /* plotting the local population bargraph*/
             frame.addToPlot(localPopulation);
+            /* plotting the local population Label*/
+            frame.addToPlot(localPopulationLabel);
 
-            /* Define Rectangle for Local Population Graph */
+
+        }
+        /* Define Rectangle for Foreignpopulation Graph */
+        for (int i = 0; i < arrayCities.length; i++) {
+            /* Define Rectangle for Foreign Population Graph */
             Rectangle foreignPopulation = new Rectangle();
             Point foreignersStartPoint = new Point();
-            foreignersStartPoint.setX(arrayCities[i].getLocation().getX() - 80.0);
+            foreignersStartPoint.setX(arrayCities[i].getLocation().getX() - 70.0);
             foreignersStartPoint.setY(arrayCities[i].getLocation().getY());
-            foreignPopulation.setTopLeftPoint(localStartPoint);
+            foreignPopulation.setTopLeftPoint(foreignersStartPoint);
             foreignPopulation.setWidth(20.0);
             foreignPopulation.setHeight(arrayCities[i].getForeignResidentsPercentage() );
-            foreignPopulation.setFillColor(Color.MAGENTA);
+            foreignPopulation.setFillColor(Color.darkGray);
+            Label foreignPopulationLabel = new Label();
+            foreignPopulationLabel.setText(String.valueOf(arrayCities[i].getForeignResidentsPercentage()));
+            foreignPopulationLabel.setPosition(foreignersStartPoint);
 
             /* plotting the foreign population bargraph*/
             frame.addToPlot(foreignPopulation);
+            /* plotting the foreign population Label*/
+            frame.addToPlot(foreignPopulationLabel);
         }
 
 
