@@ -25,7 +25,6 @@ public class ReadJSONFile {
             Map<String,Object> properties = f.getProperties();
             // ....
 
-
             // Extract geometry
             GeoJsonObject geometry = f.getGeometry();
             if(geometry instanceof LineString) {
@@ -37,6 +36,7 @@ public class ReadJSONFile {
                 throw new RuntimeException("Unhandled geometry type: " + geometry.getClass().getName());
             }
         }
+        System.out.println(coordinates);
         return coordinates;
     }
 
