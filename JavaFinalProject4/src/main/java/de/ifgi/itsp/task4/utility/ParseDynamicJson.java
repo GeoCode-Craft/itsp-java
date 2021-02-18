@@ -3,16 +3,20 @@ package de.ifgi.itsp.task4.utility;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ParseDynamicJson {
 
 
-    public static void parseObject(JSONObject json, String key) {
-        System.out.println(json.get(key));
+    public static Object parseObject(JSONObject json, String key) {
+        //System.out.println(json.get(key));
+        return json.get(key);
     }
 
-    public static void getKey(JSONObject json, String key) {
+    public static List<Object> getKey(JSONObject json, String key) {
+        List<Object> dataList = new ArrayList<>();
 
         boolean exists = json.has(key);
         Iterator<?> keys;
@@ -27,7 +31,7 @@ public class ParseDynamicJson {
                     if (json.get(nextKeys) instanceof JSONObject) {
 
                         if (exists == false) {
-                            getKey(json.getJSONObject(nextKeys), key);
+                            dataList.add(getKey(json.getJSONObject(nextKeys), key));
                         }
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {
@@ -37,7 +41,7 @@ public class ParseDynamicJson {
                             JSONObject innerJSOn = new JSONObject(jsonarrayString);
 
                             if (exists == false) {
-                                getKey(innerJSOn, key);
+                                dataList.add(getKey(innerJSOn, key));
                             }
 
                         }
@@ -51,8 +55,9 @@ public class ParseDynamicJson {
             }
 
         } else {
-            parseObject(json, key);
+            dataList.add(parseObject(json, key));
         }
+        return  dataList;
 
     }
 
