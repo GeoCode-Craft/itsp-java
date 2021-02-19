@@ -5,9 +5,9 @@ public class Polyline extends Shape{
     private int numPoints;
 
 
-    public Polyline(Point[] points, int numPoints) {
+    public Polyline(Point[] points) {
         this.points = points;
-        this.numPoints = numPoints;
+        this.numPoints = this.points.length;
     }
 
     public Polyline() {
