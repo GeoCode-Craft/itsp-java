@@ -4,17 +4,12 @@ import de.ifgi.itsp.task4.shapes.Label;
 import de.ifgi.itsp.task4.shapes.Point;
 import de.ifgi.itsp.task4.shapes.Rectangle;
 import de.ifgi.itsp.task4.shapes.*;
-import de.ifgi.itsp.task4.utility.ParseDynamicJson;
+import de.ifgi.itsp.task4.utility.InputStringReader;
 import de.ifgi.itsp.task4.utility.Utility;
 import de.ifgi.itsp.task4.view.SimpleFrame;
-import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
 
 public class Main {
@@ -150,7 +145,7 @@ public class Main {
         legendLocation.setY(30);
 
         Label legendLabel = new Label();
-        legendLabel.setText("The circle size represents population size. The GDP is higher in Greener cities and lesser in Browner cities");
+        legendLabel.setText("The circle size represents population size. The GDP is higher in Greener cities and lesser in Browner cities. The Line Represents Europe Coastline");
         legendLabel.setPosition(legendLocation);
         frame.addToPlot(legendLabel);
 
@@ -161,111 +156,48 @@ public class Main {
             System.out.println(city.getName() + " : " + city.getLocation() +" : " + city.getPopulation());
         }
 
-        /*
-        * European Coastline Section
-        *@Param
-        */
-       String first ="C:\\Users\\ADMIN\\Desktop\\itsp-java\\JavaFinalProject4\\src\\main\\java\\de\\ifgi\\itsp\\task4\\europecoastline.geojson";
-        List<Object> coordsList = null;
-       try{
-           String inputJson = new String((Files.readAllBytes(Paths.get(first))));
-           JSONObject inputJSONOBject = new JSONObject(inputJson);
-           coordsList = ParseDynamicJson.getKey(inputJSONOBject, "coordinates");
+        /* European Coastline Section*/
 
-       } catch (IOException e){
-           e.printStackTrace();
-       }
-       // Converting Lists ofg coordinates to Array
-        Object[] coordsArray = new Object[coordsList.size()];
-        coordsArray = coordsList.toArray(coordsArray);
+        String europeancoastline_file ="C:\\Users\\pondi\\Desktop\\itsp-java\\JavaFinalProject4\\src\\main\\java\\de\\ifgi\\itsp\\task4\\europecoastline.geojson";
 
-        //System.out.println(Arrays.toString(coordsArray));
-        String coastlineRawData = Arrays.toString(coordsArray);
-        String[] lineStringInitial=coastlineRawData.replace("[","").replace("[ ","").replace(", "," ").replace("]",",").replace(",] } },","").replace(",] } }","").split(",");
 
-        System.out.println(lineStringInitial.length);
-        int index = 0;
-        for (String c: lineStringInitial){
-           //System.out.println("count " + index + " " +c);
-           //System.out.println("YAY");
-            index ++;
-       }
-        //list with gaps Gaps and
-        String[] linestringGap = new String[lineStringInitial.length];
-        for(int i=0;i<lineStringInitial.length;i++){
-            linestringGap[i] =lineStringInitial[i] ;
+        File europeCoastlineData = new File(europeancoastline_file);
 
-        }
 
-        for(String c: linestringGap){
-            System.out.println(c);
-        }
-        //elimanate Gaps and convert to double
-        List<String> linestringGapsElim =new ArrayList<>();
-        for(int i=0;i<linestringGap.length;i++){
-            if(linestringGap[i].length() < 4){
-                //System.out.println("Out");
-            }else{
-                linestringGapsElim.add(linestringGap[i].trim());
+        String[] europeCoastlineStringArray = InputStringReader.readFileAsArray(europeCoastlineData);
+
+        for(int i = 0; i < europeCoastlineStringArray.length; i++) {
+            String data = europeCoastlineStringArray[i];
+            if(data.indexOf("[") > 0 && data.lastIndexOf("]") > 0) {
+                String coastlineSubstring = data.substring(data.indexOf("[ ["),data.lastIndexOf("]"));
+                coastlineSubstring = coastlineSubstring.replace("[ [","");
+                coastlineSubstring = coastlineSubstring.replace("[","");
+                coastlineSubstring = coastlineSubstring.replace("]","");
+                String[] coastSubstringArray = coastlineSubstring.split(",");
+                int valueN =  coastSubstringArray.length/2;
+                Point[] array = new Point[valueN];
+                int valueM = 0;
+                for(int j = 0; j < coastSubstringArray.length ; j++) {
+                    if((j%2)==0 && i != valueN) {
+
+                        double x= (Double.parseDouble(coastSubstringArray[j+1]) * scale) + xTranslation;
+                        double y= 1_000 - ((Double.parseDouble(coastSubstringArray[j]) * scale) + yTranslation );
+                        array[valueM] = new Point();
+                        array[valueM].setX(x);
+                        array[valueM].setY(y);
+                        valueM ++;
+                    }
+                }
+
+                Polyline polyline= new Polyline(array);
+
+
+                polyline.setStrokeColor(Color.getHSBColor(0.5f, 0.5f, 0.5f));
+                polyline.setStrokeWidth(1.0);
+                frame.addToPlot(polyline);
+
             }
         }
-
-        //Final European coasltine points into an array of points
-        Point[] lineStringPointArray = new Point[linestringGapsElim.size()];
-        for(int i= 0; i< linestringGapsElim.size() -2 ; i+=2){
-            //System.out.println("count "+ i  +" "+ linestringGapsElim.get(i));
-              Point coordinates = new Point();
-              System.out.println(i + " Longitude is "+ linestringGapsElim.get(i));
-              System.out.println( i + " Latitude is "+ linestringGapsElim.get(i+1));
-
-              Double y = Double.valueOf(linestringGapsElim.get(i));
-              Double x = Double.valueOf(linestringGapsElim.get(i+1));
-              coordinates.setPosition(x,y);
-
-              lineStringPointArray[i] = coordinates;
-        }
-        System.out.println(Arrays.toString(lineStringPointArray));
-
-        /* Carry out Scaling and add city label to Gui*/
-        for (int i = 0; i < lineStringPointArray.length-10; i++) {
-            if (lineStringPointArray[i]!= null){
-                System.out.println("-------------------Scaling; Translation ; Flipping----------------------------");
-                System.out.println(lineStringPointArray[i]);
-                Double x = ((lineStringPointArray[i].getX()*scale)+xTranslation) ;
-                Double y = (1_000 -((lineStringPointArray[i].getY()*scale) +yTranslation)) ;
-                lineStringPointArray[i].setX(x);
-                lineStringPointArray[i].setY(y);
-                System.out.println(lineStringPointArray[i]);
-            }
-
-        }
-
-        /* Remove nulls*/
-        List<Point> removeNulls = new ArrayList<>();
-
-        for(int i= 0;i< lineStringPointArray.length; i++ ){
-            if (lineStringPointArray[i]!= null){
-                removeNulls.add(lineStringPointArray[i]);
-            }
-        }
-
-        Point [] finalLineStringPointArray = new Point[removeNulls.size()];
-        for(int i= 0;i< removeNulls.size(); i++ ){
-            finalLineStringPointArray[i] = removeNulls.get(i);
-        }
-
-
-
-
-            /* Define Polyline and set color */
-            Polyline polyline = new Polyline(finalLineStringPointArray);
-
-            /* Plot Ocean coastline */
-            frame.addToPlot(polyline);
-
-
-
-
 
         frame.drawAllFeature();
 

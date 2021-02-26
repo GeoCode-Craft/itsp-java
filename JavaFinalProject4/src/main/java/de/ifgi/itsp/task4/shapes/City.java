@@ -65,6 +65,7 @@ public class City extends  Shape{
         this.foreignResidentsPercentage = foreignResidentsPercentage;
     }
 
+
     @Override
     public String toString() {
         return "City{" +
