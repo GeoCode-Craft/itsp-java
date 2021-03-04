@@ -15,7 +15,7 @@ public class Utility {
 
     public static List<City> getCityPointsFromFile(){
         /* Reading the text cities file*/
-        File cityDataFile = new File("C:\\Users\\ADMIN\\Desktop\\itsp-java\\JavaFinalProject3\\src\\de\\ifgi\\itsp\\task3\\europeancities.txt");
+        File cityDataFile = new File("C:/Users/pondi/Desktop/itsp-java/JavaFinalProject3/src/de/ifgi/itsp/task3/europeancities.txt");
 
         /* Instantiation of City Array holder*/
         List<City> arrayCities = new ArrayList<City>();

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         /* Reading the text cities file*/ //pondijavafinalproject1//C:\Users\ADMIN\Desktop\itsp-java\JavaFinalProject1\src\de\ifgi\itsp\europeancities.txt
-        File cityDataFile = new File("C:\\Users\\ADMIN\\Desktop\\itsp-java\\JavaFinalProject1\\src\\de\\ifgi\\itsp\\europeancities.txt");
+        File cityDataFile = new File("C:/Users/pondi/Desktop/itsp-java/JavaFinalProject1/src/de/ifgi/itsp/europeancities.txt");
         Scanner cityDataFileReader = null;
         try {
             cityDataFileReader = new Scanner(cityDataFile);
@@ -63,7 +63,7 @@ public class Main {
                     ", Population=" + city.getPopulation() +
                     ", Area in Km2=" + city.getAreaKm2()+
                     ", GDP in € Billions=" + city.getGdpInBillions() +
-                    ", Foreign Residents Percentage=" + city.getGdpInBillions());
+                    ", Foreign Residents Percentage=" + city.getForeignResidentsPercentage());
         }
 
 
